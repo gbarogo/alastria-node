@@ -22,5 +22,5 @@ RUN ./monitor.sh build
 
 EXPOSE 9000 21000 21000/udp 22000 41000 8443
 
-RUN ./start.sh
+RUN ./start.sh docker
 CMD ["/root/alastria-node/scripts/start.sh","--watch"]
