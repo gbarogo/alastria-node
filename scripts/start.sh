@@ -7,6 +7,7 @@ MESSAGE='Usage: start.sh <--clean> <--no-monitor> <--watch>'
 MONITOR=1
 WATCH=0
 CLEAN=0
+DOCKER=0
 
 while [[ $# -gt 0  ]]
 do
@@ -20,6 +21,9 @@ do
     ;;
     -c|-C|--clean)
     CLEAN=1
+    ;;
+    -d|--docker)
+    DOCKER=1
     ;;
     -h|-H|--help)
     echo $MESSAGE
@@ -104,7 +108,7 @@ else
     fi
 fi
 
-if ([ ! -e  ~/alastria-node/data/PID_Cron ]); then
+if ([ ! -e  ~/alastria-node/data/PID_Cron ] && [ $DOCKER -eq 0 ]); then
     ./crono.sh 60 &
     RUNNING_PID=$!
     echo ${RUNNING_PID} > ~/alastria-node/data/PID_Cron
