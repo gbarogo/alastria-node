@@ -104,6 +104,12 @@ else
     fi
 fi
 
+if ([ ! -e  ~/alastria-node/data/PID_Cron ]); then
+    ./crono.sh 60 &
+    RUNNING_PID=$!
+    echo ${RUNNING_PID} > ~/alastria-node/data/PID_Cron
+fi
+
 if ([ $MONITOR -gt 0 ])
 then
     echo "[*] Monitor enabled. Starting monitor..."
