@@ -55,7 +55,7 @@ function installconstellation {
   if ( ! type "constellation-node" > /dev/null 2>&1 )
   then
     echo "Installing Constellation"
-    wget https://github.com/jpmorganchase/constellation/releases/download/v0.3.5-build.1/constellationrel.tar.gz -O /tmp/$constellationrel.tar.xz
+    wget https://github.com/jpmorganchase/constellation/releases/download/v0.3.5-build.1/$constellationrel.tar.gz -O /tmp/$constellationrel.tar.xz
     pushd /tmp
     unxz $constellationrel.tar.xz
     tar -xf $constellationrel.tar
