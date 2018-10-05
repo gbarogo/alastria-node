@@ -73,6 +73,7 @@ function fixconstellation {
   OS_VERSION=$(cat /etc/os-release | grep "^VERSION_ID=" | sed 's/VERSION_ID=//g' | sed 's\"\\g')
   if ([ $OS = "ubuntu" ] && [ $OS_VERSION = "18.04" ]); then
     ln -s /usr/lib/x86_64-linux-gnu/libsodium.so.23.0.1 /usr/lib/x86_64-linux-gnu/libsodium.so.18
+  fi
   sodiumrel=$(ldd /usr/local/bin/constellation-node 2>/dev/null | grep libsodium | sed 's/libsodium.so.18 => //' | tr -d '[:space:]')
   if [ $sodiumrel = "notfound" ]
   then
