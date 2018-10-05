@@ -72,20 +72,21 @@ function fixconstellation {
   OS_VERSION=$(cat /etc/os-release | grep "^VERSION_ID=" | sed 's/VERSION_ID=//g' | sed 's\"\\g')
   if ([ $OS = "ubuntu" ] && [ $OS_VERSION = "18.04" ]); then
     ln -s /usr/lib/x86_64-linux-gnu/libsodium.so.23.0.1 /usr/lib/x86_64-linux-gnu/libsodium.so.18
-  fi
+  else
   sodiumrel=$(ldd /usr/local/bin/constellation-node 2>/dev/null | grep libsodium | sed 's/libsodium.so.18 => //' | tr -d '[:space:]')
-  if [ $sodiumrel = "notfound" ]
-  then
-    if [ -f /lib64/libsodium.so ]
+    if [ $sodiumrel = "notfound" ]
     then
-      echo "The libsodium package version in the distribution mismatches the one linked in constellation. Symlinking"
-      sudo ln -s /lib64/libsodium.so /lib64/libsodium.so.18
-      sudo ldconfig
-    else
-      echo "libsodium requirement in constellation was not satisfied, and a libsodium library was not found to make-do."
-      exit
+      if [ -f /lib64/libsodium.so ]
+      then
+        echo "The libsodium package version in the distribution mismatches the one linked in constellation. Symlinking"
+        sudo ln -s /lib64/libsodium.so /lib64/libsodium.so.18
+        sudo ldconfig
+      else
+        echo "libsodium requirement in constellation was not satisfied, and a libsodium library was not found to make-do."
+        exit
+      fi
+     fi 
     fi
-  fi 
 }
 
 function installquorum {
