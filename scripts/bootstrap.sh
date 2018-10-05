@@ -68,9 +68,7 @@ function installconstellation {
 
 function fixconstellation {
   #It turns out that centos ships libsodium-23 which does not provide a link for libsodium 18
-  OS=$(cat /etc/os-release | grep "^ID=" | sed 's/ID=//g' | sed 's\"\\g')
-  OS_VERSION=$(cat /etc/os-release | grep "^VERSION_ID=" | sed 's/VERSION_ID=//g' | sed 's\"\\g')
-  if ([ $OS = "ubuntu" ] && [ $OS_VERSION = "18.04" ]); then
+  if ([ ! -e /usr/lib/x86_64-linux-gnu/libgen.so.18 ] && [ -e /usr/lib/x86_64-linux/libgen.so.23.0.1 ]); then
     ln -s /usr/lib/x86_64-linux-gnu/libsodium.so.23.0.1 /usr/lib/x86_64-linux-gnu/libsodium.so.18
   else
   sodiumrel=$(ldd /usr/local/bin/constellation-node 2>/dev/null | grep libsodium | sed 's/libsodium.so.18 => //' | tr -d '[:space:]')
