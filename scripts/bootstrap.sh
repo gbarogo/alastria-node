@@ -57,8 +57,7 @@ function installconstellation {
     echo "Installing Constellation"
     wget https://github.com/jpmorganchase/constellation/releases/download/v0.3.5-build.1/$constellationrel.tar.gz -O /tmp/$constellationrel.tar.xz
     pushd /tmp
-    unxz $constellationrel.tar.xz
-    tar -xf $constellationrel.tar
+    tar -xzvf $constellationrel.tar.xz
     sudo cp $constellationrel/constellation-node /usr/local/bin 
     sudo chmod 0755 /usr/local/bin/constellation-node
     sudo rm -rf $constellationrel.tar.xz $constellationrel.tar $constellationrel
