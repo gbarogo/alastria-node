@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 function superuser {
   if ( type "sudo"  > /dev/null 2>&1 )
   then
