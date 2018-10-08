@@ -1,5 +1,14 @@
 #!/bin/bash
 
+function superuser {
+  if ( type "sudo"  > /dev/null 2>&1 )
+  then
+    sudo $@
+  else
+    eval $@
+  fi
+}
+
 function installgo {
   GOREL="go1.9.5.linux-amd64.tar.gz"
   if ( ! type "go" > /dev/null 2>&1 )
